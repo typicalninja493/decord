@@ -14,7 +14,7 @@ class Plugin {
        this.repo = repo
        this.name = name
     }
-    async Load(){
+    async Load(client){
         return true
     }
 async Unload() {

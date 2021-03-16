@@ -11,12 +11,13 @@ class Client extends Discord.Client {
         super(options)
         valid.validateOptions(options)
 
-
+    this.getPrefix = options.getPrefix && typeof options.getPrefix == 'function' ? options.getPrefix : m => '!'
     this.ownerID = options.ownerID ? options.ownerID : []
     this.commandsPath = options.commandsPath ? options.commandsPath : '../src/default/commands'
     this.eventsPath = options.eventsPath ?  options.eventsPath : '../src/default/events'
     this.Commands = new Discord.Collection()
     this.Plugins = new Discord.Collection()
+    this.guildOnly = options.guildOnly || false
     
 
      /*
@@ -82,7 +83,7 @@ class Client extends Discord.Client {
 
    registerDefaultEvents(client, ignoredEvents = {}){
     const filePath = path.join(__dirname, '/default/events')
-    if(typeof ignoredEvents !== 'object' && ignoredcommands !== null) {
+    if(typeof ignoredEvents !== 'object' && ignoredEvents !== null) {
         throw new Error('Ignored Events must be a object')
     }
  
@@ -96,23 +97,26 @@ class Client extends Discord.Client {
         return true;
      
 }
-loadPlugins(filePath, ignoredPlugins = {}){
+loadPlugins(filePath, client, ignoredPlugins = {}){
     if(!fs.existsSync(filePath)) throw new Error(`Path ${filePath} for plugins was not found`)// path does not exist
     if(typeof ignoredPlugins !== 'object' && ignoredPlugins !== null) {
         throw new Error('Ignored Events must be a object')
     }
  
-
+      
 
     try {
         this.emit('update', `[Client] => plugins register starting register plugins`)
-            register.registerPlugins(filePath, this.Plugins, ignoredPlugins)
+            register.registerPlugins(filePath, this.Plugins, client, ignoredPlugins)
         } catch(err){
             this.emit('registerFail', err)
             this.emit('update', `[Client] => Events register failed to register commands in dir ${filePath}`)
         }
         return true;
 
+
+}
+registerControllers(pathToFile, ignoredControllers = {}) {
 
 }
 }

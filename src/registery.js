@@ -2,8 +2,6 @@ const fs = require('fs').promises;
 const path = require('path');
 const validator = require('../src/validator')
 const valid = new validator()
-const Command = require('../src/struct/commands')
-
 // where commands and events get added to the client
 
 
@@ -19,7 +17,7 @@ class Register {
       let stat = await fs.lstat(path.join(pathTOFile, file));
 
       if(stat.isDirectory()) {
-        registerCommands(path.join(pathTOFile, file), collection);
+        this.registerCommands(path.join(pathTOFile, file), collection);
       } else {
         if(file.endsWith(".js")) {
           let commandName = file.substring(0, file.indexOf(".js"));
@@ -61,7 +59,7 @@ class Register {
       let stat = await fs.lstat(path.join(pathTOFile, file));
 
       if(stat.isDirectory()) {
-        registerEvents(path.join(pathTOFile, file), client);
+        this.registerEvents(path.join(pathTOFile, file), client);
       } else {
         if(file.endsWith(".js")) {
           let eventName = file.substring(0, file.indexOf(".js"));
@@ -92,39 +90,41 @@ class Register {
 
     }
   }
-  async registerPlugins(filePath, Plugin, ignoredPlugins) {
+  async registerPlugins(filePath, Plugin, client, ignoredPlugins) {
 
     let files = await fs.readdir(filePath);
 
     for(let file of files) {
-      let stat = await fs.lstat(path.join(pathTOFile, file));
+      let stat = await fs.lstat(path.join(filePath, file));
 
       if(stat.isDirectory()) {
-        registerPlugins(path.join(filePath, file), Plugin, ignoredPlugins);
+        this.registerPlugins(path.join(filePath, file), Plugin, ignoredPlugins);
       } else {
         if(file.endsWith(".js")) {
           let pluginName = file.substring(0, file.indexOf(".js"));
         
           if(ignoredPlugins[pluginName] == false) {
-            client.emit('update', `[Register] => plugin ${eventName} Was ignored`)
+            client.emit('update', `[Register] => plugin ${pluginName} Was ignored`)
             return;
           }
 
           try {
             let plugin = require(path.join(filePath, file));
             
-    const pluginin = new plugin()
+    const pluginIN = new plugin()
     
-          valid.validatePlugins(pluginin)
+          valid.validatePlugins(pluginIN)
 
-          Plugin.set(pluginin.name, pluginin)
+          await pluginIN.Load(client)
 
-         client.emit('eventLoaded', eventName)
-         client.emit('update', `[Register] => event ${eventName} Loaded`)
+          Plugin.set(pluginIN.name, pluginIN)
+
+         client.emit('eventLoaded', pluginName)
+         client.emit('update', `[Register] => event ${pluginName} Loaded`)
 
           } catch(err) {
-            client.emit('eventLoadError', eventName, err)
-            client.emit('update', `[Register] => event ${eventName} Failed to load`)
+            client.emit('eventLoadError', pluginName, err)
+            client.emit('update', `[Register] => event ${pluginName} Failed to load`)
           }
         }
       }

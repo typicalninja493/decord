@@ -37,7 +37,7 @@ class Validator {
    
   }
 
-  async validateCommands(command, client) { 
+  async validateCommands(command) { 
     if(!(command instanceof Command)) {
       throw new ValidationError(`command Must be a extended class of Command`)
     }
@@ -56,7 +56,7 @@ class Validator {
     if(!(pluginIN instanceof Plugin)) {
       throw new ValidationError(`plugin Must be a extended class of Plugin`)
     }
-    if(!!pluginIN.name) {
+    if(!pluginIN.name) {
       throw new ValidationError(`Name is needed for plugins`)
     }
 
