@@ -37,6 +37,11 @@ if(cmd.userPermissions) {
   
 }
 
+if(cmd.ownerOnly && !message.client.ownerID.includes(message.author.id)) return message.channel.send('Command is bot owner only!!')
+
+if(cmd.nsfw && !message.channel.nsfw) return message.channel.send('This command can only be used in a nsfw channel!!')
+
+
 
 try {
     cmd.execute(message, args);

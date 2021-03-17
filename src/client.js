@@ -10,8 +10,8 @@ class Client extends Discord.Client {
     constructor(options = {}) {
         super(options)
         valid.validateOptions(options)
-
-    this.getPrefix = options.getPrefix && typeof options.getPrefix == 'function' ? options.getPrefix : m => '!'
+    this.prefix = options.prefix ? options.prefix : '!' 
+    this.getPrefix = options.getPrefix && typeof options.getPrefix == 'function' ? options.getPrefix : m => this.prefix
     this.ownerID = options.ownerID ? options.ownerID : []
     this.commandsPath = options.commandsPath ? options.commandsPath : '../src/default/commands'
     this.eventsPath = options.eventsPath ?  options.eventsPath : '../src/default/events'
