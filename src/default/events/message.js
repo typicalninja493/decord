@@ -1,7 +1,9 @@
 const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 
-module.exports = async (client, message) => {
+module.exports  = {
+    event: 'message',
+    execute(message, client) {
 if(message.author.bot) return;
 if(client.guildOnly && !message.channel.guild) return;
 
@@ -42,5 +44,5 @@ try {
 console.error(error);
 message.reply('there was an error trying to execute that command!');
 }
-
-} 
+    }
+    } 

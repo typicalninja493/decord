@@ -62,7 +62,17 @@ class Validator {
 
     //TODO: Have more checks
   }
-
+  validateEvents(event) {
+    if(!event.event){ 
+      throw new ValidationError(`event missing`) 
+    }
+    if(!event.execute) {
+      throw new ValidationError(`execute is a needed value for events`) 
+    }
+    if(typeof event.execute !== 'function') {
+      throw new ValidationError(`execute must be a function, received ${typeof event.execute}`) 
+    }
+  }
 }
 
 module.exports = Validator;

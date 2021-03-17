@@ -73,9 +73,17 @@ class Register {
             let event = require(path.join(pathTOFile, file));
             
         
-         //  valid.validateEvents(event)
+         valid.validateEvents(event)
 
-         client.on(eventName, event.bind(null, client));
+
+         if(event.execute && typeof event.execute == 'function') {
+          if(event.once) {
+            client.once(event.event, (...args) => event.execute(...args, client));
+          } else {
+          client.on(event.event, (...args) => event.execute(...args, client));
+          }
+        }
+      
 
          client.emit('eventLoaded', eventName)
          client.emit('update', `[Register] => event ${eventName} Loaded`)
@@ -119,12 +127,12 @@ class Register {
 
           Plugin.set(pluginIN.name, pluginIN)
 
-         client.emit('eventLoaded', pluginName)
-         client.emit('update', `[Register] => event ${pluginName} Loaded`)
+         client.emit('pluginLoaded', pluginName)
+         client.emit('update', `[Register] => plugin ${pluginName} Loaded`)
 
           } catch(err) {
-            client.emit('eventLoadError', pluginName, err)
-            client.emit('update', `[Register] => event ${pluginName} Failed to load`)
+            client.emit('pluginLoadError', pluginName, err)
+            client.emit('update', `[Register] => plugin ${pluginName} Failed to load`)
           }
         }
       }
