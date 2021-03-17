@@ -32,13 +32,13 @@ class Client extends Discord.Client {
     }*/
     
     }
-   registerCommands(filePath = this.commandsPath, client = this) {
+   registerCommands(filePath = this.commandsPath, client = this, ignoredCommands = []) {
 
     if(!fs.existsSync(filePath)) throw new Error(`Path ${filePath} for commands was not found`)
 
     try {
         this.emit('update', `[Client] => Command register starting register for path ${filePath}`)
-        register.registerCommands(filePath, this.Commands, client)
+        register.registerCommands(filePath, this.Commands, client, ignoredCommands)
     } catch(err){
         this.emit('registerFail', err)
         this.emit('update', `[Client] => Command register failed to register all commands in dir ${filePath}`)
