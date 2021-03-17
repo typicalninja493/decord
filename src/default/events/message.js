@@ -23,7 +23,7 @@ const cmd = client.Commands.get(command)
 if(!cmd) return;
 
 
-if(cmd.userPermissions) {
+if(cmd.userPermissions && cmd.userPermissions.length > 0) {
     if(message.guild) {
         const check = (permission) => message.member.hasPermission(permission);
 
