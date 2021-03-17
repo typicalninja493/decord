@@ -48,9 +48,7 @@ class Validator {
     if(!Array.isArray(command.aliases)) {
       throw new ValidationError(`aliases must be a array`)
     }
-    if(!Array.isArray(command.ignoreCooldown) && typeof command.ignoreCooldown !== 'function') {
-      throw new ValidationError(`ignoreCooldown must be a array of user id's`)
-    }
+   
   }
   validatePlugins(pluginIN) {
     if(!(pluginIN instanceof Plugin)) {
