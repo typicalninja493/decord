@@ -141,14 +141,8 @@ client.registerDefaultEvents(client, [
 * Customizable Command Categories
 * Default commands (Check the Default / built-in commands section for a list of built-in commands
 * Command Aliases
-* directory command option - required to work. Ex: dir: __dirname,
-
-
-
-# Invite our bot for testing the package before using it for your bot
-
-[Invite](https://discord.com/oauth2/authorize?client_id=544895245326876672&permissions=8&scope=bot)
+* directory command option - required to work. Ex: dir: __dirname
 
 
 # Support Server
-[Support](https://discord.gg/mTqMbxFn9r)
+Test the bot and get support [here](https://discord.gg/mTqMbxFn9r)
