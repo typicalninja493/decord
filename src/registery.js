@@ -100,7 +100,7 @@ class Register {
   }
   async registerPlugins(filePath, Plugin, client, ignoredPlugins) {
 
-    let files = await fs.readdir(filePath);
+    const files = await fs.readdir(filePath);
 
     for(let file of files) {
       let stat = await fs.lstat(path.join(filePath, file));

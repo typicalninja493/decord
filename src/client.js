@@ -27,6 +27,8 @@ class Client extends Discord.Client {
     this.cooldowns = new Discord.Collection();
     this.guildOnly = options.guildOnly || false;
 
+    this.status = options.status
+
     /*
     if(fs.existsSync(this.eventsPath)) {
         try {

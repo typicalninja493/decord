@@ -63,14 +63,14 @@ if(cmd.ownerOnly && !message.client.ownerID.includes(message.author.id)) return 
 
 if(cmd.nsfw && !message.channel.nsfw) return message.channel.send('This command can only be used in a nsfw channel!!');
 
-// if(cmd.cooldown)
+
 timestamps.set(message.author.id, now);
 setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 try {
     cmd.execute(message, args);
 }
 catch (error) {
-console.error(error);
+console.error(`The following error ocurred while executing command ${cmd.name} | in ${message.guild.name} | args : ${args} | err: ${error}`);
 message.reply(`❌ | An error occurred while executing ${cmd.name}`);
 }
 },
