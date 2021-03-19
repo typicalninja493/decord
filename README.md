@@ -145,4 +145,4 @@ client.registerDefaultEvents(client, [
 
 
 # Support Server
-Test the bot and get support [here](https://discord.gg/mTqMbxFn9r)
+Test the package with our bot and get support [here](https://discord.gg/mTqMbxFn9r)
