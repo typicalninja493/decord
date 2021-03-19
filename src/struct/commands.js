@@ -2,7 +2,9 @@ class Command {
   constructor(name, options = {}) {
     const {
       aliases = [],
+      dir = '',
       ownerOnly = false,
+      category = 'general',
       guildOnly = false,
       cooldown = 3,
       description = "No description provided.",
@@ -29,6 +31,8 @@ class Command {
     }*/
 
     this.usage = usage;
+    this.dir = dir;
+    this.category = category
     this.name = name;
     this.aliases = aliases;
     this.ownerOnly = Boolean(ownerOnly);
