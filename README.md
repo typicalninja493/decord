@@ -2,7 +2,7 @@
 
 * What is decord? 
 
- #### Decord is a yet another frame-work for [discord.js](https://discord.js.org/), this was inspired by [akiro](https://www.npmjs.com/package/discord-akairo)
+ #### Decord is a yet another frame-work for [discord.js](https://discord.js.org/), this was inspired by [discord-akairo](https://www.npmjs.com/package/discord-akairo)
 
  This in beta!!
 
@@ -146,3 +146,10 @@ client.registerDefaultEvents(client, [
 
 # Support Server
 Test the package with our bot and get support [here](https://discord.gg/mTqMbxFn9r)
+
+
+# Additional information
+
+[Discord.js guide](https://discordjs.guide)
+
+[discord.js documentation](https://discord.js.org/#/docs/main/stable/general/welcome)
