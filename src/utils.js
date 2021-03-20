@@ -64,6 +64,12 @@ function clean(text, client) {
     }
   }
 
+
+/**
+ * Paginate a given array of strings
+ * @param {message} message - The message
+ * @param {array} textArray - A array of strings to paginate
+ */
 async function paginate(message, textArray, type = 'normal') {
 const pages = [...textArray];
 let page = 0;
@@ -128,9 +134,36 @@ collector.on('end', async (collected, reason) => {
 
 // paginate credits: https://github.com/XzFirzal/discord-paginator.js/blob/master/index.js
 
+
+/**
+ * parse a mention in a string, 1 string at a time
+ * @param {String} content - The mention used to get the user from
+ * @param {Client} client - The client.
+ * @returns {User}
+ */
+async function parseMentions(content, client) {
+ if(!content) return false;
+
+    if (content.startsWith('<@') && content.endsWith('>')) {
+		content = content.slice(2, -1);
+
+		if (content.startsWith('!')) {
+			content = content.slice(1);
+		}
+    let user = client.users.cache.get(content);
+
+    if(!user) {
+        user = client.users.fetch(content).catch(() => false);
+    }
+
+		return user;
+	}
+}
+
 module.exports = {
     formatTime,
     packageExist,
     clean,
     paginate,
+    parseMentions,
 };

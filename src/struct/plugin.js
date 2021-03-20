@@ -1,3 +1,8 @@
+  /**
+     * The plugin class to extend
+     * @param {string} name - The plugin name
+     * @param {Object} options - The plugin options
+     */
 class Plugin {
     constructor(name, options = {}) {
 
@@ -14,6 +19,10 @@ class Plugin {
        this.repo = repo;
        this.name = name;
     }
+      /**
+     * The plugin class to extend
+     * @param {Client} client - The decord client
+     */
     async Load() {
         return true;
     }

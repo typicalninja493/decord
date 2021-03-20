@@ -1,7 +1,7 @@
 const Command = require('../../struct/commands');
 const { version } = require('../../../index');
 const Discord = require('discord.js');
-const { formatTime, clean, paginate } = require('../../../src/utils');
+const { formatTime, clean, paginate, parseMentions } = require('../../../src/utils');
 const { stripIndent } = require('common-tags');
 
 module.exports = class pingCommand extends Command {
@@ -30,7 +30,8 @@ module.exports = class pingCommand extends Command {
             Average websocket latency: \`${message.client.ws.ping}\`
             `;
              return message.channel.send(string);
-          } else if(args[0].toLowerCase() === 'eval') {
+          }
+          else if(args[0].toLowerCase() === 'eval') {
             const code = args.slice(1).join(' ');
             if(!code) {
           return message.channel.send(stripIndent`
@@ -68,6 +69,9 @@ module.exports = class pingCommand extends Command {
             const et = errTostrin.match(/(.|[\r\n]){1,500}/g);
             await paginate(message, et, 'error');
           }
+          }
+          else {
+            return message.channel.send(`\`${args[0]}\` Is not a valid subcommand`);
           }
         }
 };

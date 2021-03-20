@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h3>Decord</h3>
+<ul>
+<li>What is decord?</li>
+</ul>
+<h4>Decord is a yet another frame-work for <a href="https://discord.js.org/">discord.js</a>, this was inspired by <a href="https://www.npmjs.com/package/discord-akairo">discord-akairo</a></h4>
+<p>This in beta!!</p>
+<h2>Usage</h2>
+<ul>
+<li>This package is not yet released to npm, <code>index.js</code> is the main file of the package (will be renamed to the package name when released)</li>
+</ul>
+<h1>Default / Built-in Commands</h1>
+<ul>
+<li>help</li>
+<li>decode - Same as a help command</li>
+</ul>
+<p><strong>More Coming Soon</strong></p>
+<pre class="prettyprint source"><code>const { Client } = require('./index') 
+const path = require('path')
+// client is extended from discord.client
+
+const client = new Client({
+  ownerID: [&quot;241632903258177536&quot;], // Add in your bot owners by IDs
+  getPrefix: () => &quot;d!&quot;, // Change the default prefix
+  status: {
+    type: 'LISTENING',
+    statuses: [
+      'Decord official bot',
+      '!help'
+    ],
+   } // Set the bot's status
+}); // Obviously these client options are all optional if you want a regular bot with all default settings. The ownerID option is required if you want to have owner only commands.
+
+
+client.registerCommands(path.join(__dirname, './commands'), client) // register commands
+
+
+client.registerDefaultCommands(client) // register the default commands
+
+
+client.registerDefaultEvents(client) // register the default events decord provides
+
+client.loadPlugins('./plugins', client) // load plugins if you have any
+
+
+client.login('YOUR_TOKEN_HERE') // login as usual
+
+</code></pre>
+<h3>Methods</h3>
+<p><code>registerDefaultEvents(parameters)</code> - Register the default events</p>
+<blockquote>
+<p>Parameters: <code>client</code> - <strong>Your discord client ex: (client)</strong></p>
+</blockquote>
+<p><code>loadPlugins(parameters)</code> - Load the plugins in a directory</p>
+<blockquote>
+<p>Parameters : <code>Path to your file, client</code> - <strong>ex : ('./plugin', client)</strong></p>
+</blockquote>
+<p><code>registerCommands(parameters)</code></p>
+<h3>Events file</h3>
+<ul>
+<li>This is how you events file should look like :</li>
+</ul>
+<pre class="prettyprint source"><code>module.exports = {
+    event: 'event_name',
+     once: if event should be .on or .once
+ execute(event_parameters, client) {
+
+// code here 
+
+ }
+};
+</code></pre>
+<h5>Explanation</h5>
+<p><code>event</code> - the event this should run, ex: ready
+<code>once</code> - set to true if its should be run on client.once
+<code>execute</code> - must be a function, where your code is,</p>
+<blockquote>
+<p>parameters for execute are parameters for the event your listening for + client at the end</p>
+</blockquote>
+<h3>Example</h3>
+<ul>
+<li>ready event</li>
+</ul>
+<pre class="prettyprint source"><code>
+module.exports = {
+   event: 'ready',
+    once: true,
+execute(client) {
+console.log(`Ready! Logged in as ${client.user.tag}`);
+
+}
+};
+</code></pre>
+<h3>Ignoring commands/events/plugins</h3>
+<ul>
+<li>
+<p>All the events to register a default event/ default command/command/event has a parameter named ignored${type}, you can use this to skip over events you don't need or, use it for debugging to see if a certain event is the issue without removing code or file</p>
+</li>
+<li>
+<p>As a example we here is how to disable a event (here built in ready)</p>
+</li>
+</ul>
+<pre class="prettyprint source"><code>client.registerDefaultEvents(client, [
+    ready: false
+])
+</code></pre>
+<h1>Planned Features and commands</h1>
+<ul>
+<li>load - Default Command</li>
+<li>Reload - Default Command</li>
+<li>Unload - Default Command</li>
+<li>Per-Server Settings</li>
+<li>Cache storage</li>
+<li>MongoDB Support</li>
+<li>Enable - Default Command</li>
+<li>Disable - Default Command</li>
+</ul>
+<h1>Current features</h1>
+<ul>
+<li>Ability to set the bot owner</li>
+<li>Ability to set command permissions</li>
+<li>Ability to set cooldowns. NOTE: THE NUMBER MUST BE IN SECONDS. Ex: miliseconds: 3000, seconds: 3</li>
+<li>Ability to make a command guild only,</li>
+<li>Customizable Command Categories</li>
+<li>Default commands (Check the Default / built-in commands section for a list of built-in commands</li>
+<li>Command Aliases</li>
+<li>directory command option - required to work. Ex: dir: __dirname</li>
+</ul>
+<h1>Support Server</h1>
+<p>Test the package with our bot and get support <a href="https://discord.gg/mTqMbxFn9r">here</a></p>
+<h1>Additional information</h1>
+<p><a href="https://discordjs.guide">Discord.js guide</a></p>
+<p><a href="https://discord.js.org/#/docs/main/stable/general/welcome">discord.js documentation</a></p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Client.html">Client</a></li><li><a href="Command.html">Command</a></li><li><a href="Validator.html">Validator</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Sat Mar 20 2021 19:24:21 GMT+0530 (India Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

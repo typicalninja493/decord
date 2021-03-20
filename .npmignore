@@ -1,0 +1,8 @@
+/commands
+/node_modules
+/plugins
+/test.js
+/.eslintrc.js
+/utils.js
+/.gitignore
+/docs
