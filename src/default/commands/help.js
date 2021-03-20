@@ -1,6 +1,6 @@
 const Command = require('../../../src/struct/commands');
 const Discord = require('discord.js');
-
+const { stripIndent } = require('common-tags');
 module.exports = class pingCommand extends Command {
   constructor() {
     super('help', {
@@ -33,7 +33,7 @@ module.exports = class pingCommand extends Command {
    const command = message.client.Commands.get(cmd) || message.client.Commands.find(c => c.aliases && c.aliases.includes(command));
    if(!command) return message.channel.send(`A command named \`${cmd}\` was not found`);
 if(command.ownerOnly && !message.client.ownerID.includes(message.author.id)) return message.channel.send(`A command named \`${cmd}\` was not found`);
-   const string = `
+   const string = stripIndent`
    ------- Help info for \`${command.name}\` -------\n
    \`\`\`
    Description: ${command.description}
