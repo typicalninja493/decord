@@ -137,7 +137,7 @@ client.registerDefaultEvents(client, [
 * Ability to set the bot owner
 * Ability to set command permissions
 * Ability to set cooldowns. NOTE: THE NUMBER MUST BE IN SECONDS. Ex: miliseconds: 3000, seconds: 3
-* Ability to make a command guld only,
+* Ability to make a command guild only,
 * Customizable Command Categories
 * Default commands (Check the Default / built-in commands section for a list of built-in commands
 * Command Aliases
