@@ -1,7 +1,7 @@
 const Command = require('../../struct/commands');
 const { version } = require('../../../index');
 const Discord = require('discord.js');
-const { formatTime, clean } = require('../../../src/utils');
+const { formatTime, clean, paginate } = require('../../../src/utils');
 const { stripIndent } = require('common-tags');
 
 module.exports = class pingCommand extends Command {
@@ -51,10 +51,22 @@ module.exports = class pingCommand extends Command {
               evaled = require('util').inspect(evaled);
             }
 
-            return message.channel.send(clean(evaled), { code:'xl' });
+            if(evaled.length < 500) {
+              return message.channel.send(clean(evaled, message.client), { code:'xl' });
+            }
+            else {
+              const evaledTostrin = clean(evaled, message.client);
+              const t = evaledTostrin.match(/(.|[\r\n]){1,500}/g);
+              await paginate(message, t);
+            }
           }
           catch(err) {
-            return message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+            if(err.length < 200) {
+              return message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err, message.client)}\n\`\`\``);
+            }
+            const errTostrin = err.toString();
+            const et = errTostrin.match(/(.|[\r\n]){1,500}/g);
+            await paginate(message, et, 'error');
           }
           }
         }
