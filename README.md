@@ -2,7 +2,7 @@
 
 * What is decord? 
 
- #### Decord is a yet another frame-work for [discord.js](https://discord.js.org/), this was inspired by [akiro](https://www.npmjs.com/package/discord-akairo)
+ #### Decord is a yet another frame-work for [discord.js](https://discord.js.org/), this was inspired by [discord-akairo](https://www.npmjs.com/package/discord-akairo)
 
  This in beta!!
 
@@ -10,12 +10,29 @@
 
 * This package is not yet released to npm, `index.js` is the main file of the package (will be renamed to the package name when released)
 
+# Default / Built-in Commands
+
+* help
+* decode - Same as a help command
+
+**More Coming Soon**
+
 ```
 const { Client } = require('./index') 
 const path = require('path')
 // client is extended from discord.client
 
-const client = new Client() // normal client options and decord options
+const client = new Client({
+  ownerID: ["241632903258177536"], // Add in your bot owners by IDs
+  getPrefix: () => "d!", // Change the default prefix
+  status: {
+    type: 'LISTENING',
+    statuses: [
+      'Decord official bot',
+      '!help'
+    ],
+   } // Set the bot's status
+}); // Obviously these client options are all optional if you want a regular bot with all default settings. The ownerID option is required if you want to have owner only commands.
 
 
 client.registerCommands(path.join(__dirname, './commands'), client) // register commands
@@ -102,3 +119,37 @@ client.registerDefaultEvents(client, [
     ready: false
 ])
 ```
+
+# Planned Features and commands
+
+* load - Default Command
+* Reload - Default Command
+* Unload - Default Command
+* Per-Server Settings
+* Cache storage
+* MongoDB Support
+* Enable - Default Command
+* Disable - Default Command
+
+
+# Current features
+
+* Ability to set the bot owner
+* Ability to set command permissions
+* Ability to set cooldowns. NOTE: THE NUMBER MUST BE IN SECONDS. Ex: miliseconds: 3000, seconds: 3
+* Ability to make a command guld only,
+* Customizable Command Categories
+* Default commands (Check the Default / built-in commands section for a list of built-in commands
+* Command Aliases
+* directory command option - required to work. Ex: dir: __dirname
+
+
+# Support Server
+Test the package with our bot and get support [here](https://discord.gg/mTqMbxFn9r)
+
+
+# Additional information
+
+[Discord.js guide](https://discordjs.guide)
+
+[discord.js documentation](https://discord.js.org/#/docs/main/stable/general/welcome)
