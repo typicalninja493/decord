@@ -142,6 +142,7 @@ client.registerDefaultEvents(client, [
 * Default commands (Check the Default / built-in commands section for a list of built-in commands
 * Command Aliases
 * directory command option - required to work. Ex: dir: __dirname
+* eval command
 
 
 # Support Server
