@@ -82,6 +82,8 @@ if (pages.length > 1) {
     reactions.remove = await msg.react(Opts.remove).catch((err) => console.log(err));
 
 }
+if(!reactions.remove) return;
+
 
 const filter = (reaction, user) => {
 	return user.id === message.author.id;
