@@ -40,7 +40,8 @@ if(command.ownerOnly && !message.client.ownerID.includes(message.author.id)) ret
    Usage: ${command.usage}
    GuildOnly: ${command.guildOnly ? 'Yes' : 'No'}
    category: ${command.category}
-   Permissions: ${command.userPermissions > 0 ? command.userPermissions.join(', ') : 'None' }
+   User-Permissions: ${command.userPermissions > 0 ? command.userPermissions.join(', ') : 'None' }
+   Bot-Permissions:  ${command.clientPermissions > 0 ? command.clientPermissions.join(', ') : 'None' }
    \`\`\`
    ------------------------------------------
    `;

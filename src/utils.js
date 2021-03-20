@@ -38,6 +38,29 @@ async function formatTime(time) {
 return content;
 }
 
+/** Check if a node-module is installed on the system or not */
+async function packageExist(package) {
+    try {
+        require.resolve(package);
+    }
+    catch(err) {
+       return false;
+    }
+return true;
+}
+
+function clean(text) {
+    if (typeof (text) === 'string') {
+        return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+    }
+
+    else {
+        return text;
+    }
+  }
+
 module.exports = {
     formatTime,
+    packageExist,
+    clean,
 };

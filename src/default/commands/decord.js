@@ -1,7 +1,7 @@
 const Command = require('../../struct/commands');
 const { version } = require('../../../index');
 const Discord = require('discord.js');
-const { formatTime } = require('../../../src/utils');
+const { formatTime, clean } = require('../../../src/utils');
 const { stripIndent } = require('common-tags');
 
 module.exports = class pingCommand extends Command {
@@ -22,15 +22,40 @@ module.exports = class pingCommand extends Command {
              Running Decord version \`${version}\`, Discord.js version \`${Discord.version}\`. Node.js version \`${process.version}\`
              on \`${process.platform}\`
            
-            ${message.client.user.username} has been up for \`${await formatTime(message.client.uptime)}\`.Using \`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB\` Ram.
-            ${message.client.Commands.size} Commands loaded,  ${message.client.ownerID ? typeof message.client.ownerID == 'string' ? '`1` Owner Registered' : `\`${message.client.ownerID.length}\` Owners Registered` : 'No owners Registered' }.
+            ${message.client.user.username} has been up for \`${await formatTime(message.client.uptime)}\`. Using \`${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB\` Of Ram.
+            ${message.client.Commands.size} Commands loaded ,  ${message.client.ownerID ? typeof message.client.ownerID == 'string' ? '`1` Owner Registered' : `\`${message.client.ownerID.length}\` Owners Registered` : 'No owners Registered' }.
             Prefix registered as \`${prefix}\`
 
             ${message.client.user.username} is ${message.client.shard ? 'Sharded' : 'Not sharded'} And is in \`${message.client.guilds.cache.size}\` ${message.client.guilds.cache.size > 1 ? 'Guilds' : 'Guild'}
             Average websocket latency: \`${message.client.ws.ping}\`
             `;
              return message.channel.send(string);
+          } else if(args[0].toLowerCase() === 'eval') {
+            const code = args.slice(1).join(' ');
+            if(!code) {
+          return message.channel.send(stripIndent`
+            \`\`\`diff
+            - !decord eval <args>
+            -               ^^^^
+
+            - Args is a needed value that is missing
+            \`\`\`
+            `);
           }
-     message.channel.send(`> ${args.join(' ')}`);
+          try {
+            let evaled = await eval(`( async () => {
+              ${code}
+            })()`);
+
+            if (typeof evaled !== 'string') {
+              evaled = require('util').inspect(evaled);
+            }
+
+            return message.channel.send(clean(evaled), { code:'xl' });
+          }
+          catch(err) {
+            return message.channel.send(`\`ERROR\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+          }
+          }
         }
 };

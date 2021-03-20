@@ -41,10 +41,7 @@ class Command {
     this.description = Array.isArray(description)
       ? description.join('\n')
       : description;
-    this.clientPermissions =
-      typeof clientPermissions === 'function'
-        ? clientPermissions.bind(this)
-        : clientPermissions;
+    this.clientPermissions = clientPermissions;
     this.userPermissions = userPermissions;
     this.nsfw = Boolean(nsfw);
     this.cooldownIgnored = cooldownIgnored;

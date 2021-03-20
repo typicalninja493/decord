@@ -39,6 +39,7 @@ class Client extends Discord.Client {
         }
     }*/
   }
+
   registerCommands(
     filePath = this.commandsPath,
     client = this,
