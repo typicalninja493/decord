@@ -1,28 +1,28 @@
 class Plugin {
-    constructor(name, options = {}){
+    constructor(name, options = {}) {
 
         const {
             version = '1.0',
             event = 'ready',
-            versionRepo = `https://github.com`,        //! Check if a valid url
-            repo = ''
+            versionRepo = 'https://github.com', // ! Check if a valid url
+            repo = '',
         } = options;
-        
+
        this.version = version;
-       this.event = event
-       this.versionRepo = versionRepo
-       this.repo = repo
-       this.name = name
+       this.event = event;
+       this.versionRepo = versionRepo;
+       this.repo = repo;
+       this.name = name;
     }
-    async Load(client){
-        return true
+    async Load() {
+        return true;
     }
 async Unload() {
-    return true
+    return true;
 }
-async action(client){
-    return console.log('[Warn] - you have a plugin which do not modify the action() function!!')
+async action(client) {
+    return console.log('[Warn] - you have a plugin which do not modify the action() function!!');
 }
 }
 
-module.exports = Plugin
+module.exports = Plugin;

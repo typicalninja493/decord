@@ -8,7 +8,7 @@ if(client.status) {
     if(client.status.statuses) {
         if(Array.isArray(client.status.statuses)) {
             const activities = client.status.statuses;
-            const interval = client.status.interval || '15000'
+            const interval = client.status.interval || '15000';
             let i = 0;
             setInterval(() => client.user.setActivity(`${activities[i++ % activities.length]}`, { type: client.status.type ? client.status.type : 'WATCHING' }).catch(console.error), interval);
         }

@@ -5,8 +5,7 @@ module.exports = class pingCommand extends Command {
   constructor() {
     super('help', {
       description: 'default help command',
-
-      userPermissions: ['ADD_REACTIONS', 'MANAGE_MESSAGES'],
+      dir: __dirname,
     });
   }
 

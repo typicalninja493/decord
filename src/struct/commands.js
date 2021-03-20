@@ -7,8 +7,8 @@ class Command {
       category = 'general',
       guildOnly = false,
       cooldown = 3,
-      description = "No description provided.",
-      usage = "No Usage provided",
+      description = 'No description provided.',
+      usage = 'No Usage provided',
       clientPermissions = [],
       userPermissions = [],
       cooldownIgnored = [],
@@ -32,7 +32,7 @@ class Command {
 
     this.usage = usage;
     this.dir = dir;
-    this.category = category
+    this.category = category;
     this.name = name;
     this.aliases = aliases;
     this.ownerOnly = Boolean(ownerOnly);
