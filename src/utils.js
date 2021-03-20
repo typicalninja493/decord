@@ -126,8 +126,7 @@ collector.on('end', async (collected, reason) => {
 });
 }
 
-// https://stackoverflow.com/questions/10474992/split-a-javascript-string-into-fixed-length-pieces
-// https://github.com/XzFirzal/discord-paginator.js/blob/master/index.js
+// paginate credits: https://github.com/XzFirzal/discord-paginator.js/blob/master/index.js
 
 module.exports = {
     formatTime,
