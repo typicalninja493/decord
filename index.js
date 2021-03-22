@@ -4,4 +4,5 @@ module.exports = {
     Command: require('./src/struct/commands.js'),
     Plugin: require('./src/struct/plugin.js'),
     util: require('./src/utils'),
+    validator: require('./src/validator'),
 };

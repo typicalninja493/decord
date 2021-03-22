@@ -5,3 +5,4 @@
 /.eslintrc.js
 /utils.js
 /.gitignore
+/.npmignore

@@ -3,7 +3,7 @@ const Opts = {
 	remove: '🗑️',
 	reaction: ['⬅️', '➡️'],
 };
-
+const { stripIndent } = require('common-tags');
 
 async function formatTime(time) {
     const roundTowardsZero = time > 0 ? Math.floor : Math.ceil;
@@ -75,10 +75,10 @@ const pages = [...textArray];
 let page = 0;
 
 for (let i = 0; i < pages.length; i++) {
-    pages[i] = `\`${i + 1}\`/\`${pages.length}\`\n${type == 'error' ? '`Error`' : ''}\n\`\`\`js\n${pages[i]}\`\`\` ${i + 1 == pages.length ? '' : 'And more...'}`;
+    pages[i] = stripIndent`\`${i + 1}\`/\`${pages.length}\`\n${type == 'error' ? '`Error`' : ''}\n\`\`\`js\n${pages[i]}\`\`\` ${i + 1 == pages.length ? '' : 'And more...'}`;
 }
 
-const msg = await message.channel.send(pages[page]);
+const msg = type == 'error' ? await message.author.send(pages[page]) : await message.channel.send(pages[page]);
 
 const reactions = {};
 
