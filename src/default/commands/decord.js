@@ -3,6 +3,8 @@ const { version } = require('../../../index');
 const Discord = require('discord.js');
 const { formatTime, clean, paginate, parseMentions } = require('../../../src/utils');
 const { stripIndent } = require('common-tags');
+const process = require('child_process');
+
 
 module.exports = class pingCommand extends Command {
     constructor() {
@@ -56,8 +58,8 @@ module.exports = class pingCommand extends Command {
               return message.channel.send(clean(evaled, message.client), { code:'xl' });
             }
             else {
-              const evaledTostrin = clean(evaled, message.client);
-              const t = evaledTostrin.match(/(.|[\r\n]){1,500}/g);
+              const evaledCleaned = clean(evaled, message.client);
+              const t = evaledCleaned.match(/(.|[\r\n]){1,500}/g);
               await paginate(message, t);
             }
           }
@@ -69,6 +71,25 @@ module.exports = class pingCommand extends Command {
             const et = errTostrin.match(/(.|[\r\n]){1,500}/g);
             await paginate(message, et, 'error');
           }
+          } 
+          else if(args[0].toLowerCase() === 'execute' || args[0].toLowerCase() === 'console') {
+            const code = args.slice(1).join(' ');
+            if(!code) {
+          return message.channel.send(stripIndent`
+            \`\`\`diff
+            - !decord execute <args>
+            -               ^^^^
+
+            - Args is a needed value that is missing
+            \`\`\`
+            `);
+          }
+            process.exec(code, async (error, stdout) => {
+              const response = (error || stdout);
+              const t = response.match(/(.|[\r\n]){1,500}/g);
+
+              await paginate(message, t);
+          });
           }
           else {
             return message.channel.send(`\`${args[0]}\` Is not a valid subcommand`);
