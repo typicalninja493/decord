@@ -3,6 +3,7 @@ module.exports = {
      once: true,
  async execute(client) {
 console.log(`Ready! Logged in as ${client.user.tag}`);
+client.user.setStatus('dnd');
 
 if(client.status) {
     if(client.status.statuses) {
