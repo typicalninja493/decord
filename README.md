@@ -123,7 +123,6 @@ client.registerDefaultEvents(client, [
 # Planned Features and commands
 
 * load - Default Command
-* Reload - Default Command
 * Unload - Default Command
 * Per-Server Settings
 * Cache storage
@@ -144,6 +143,8 @@ client.registerDefaultEvents(client, [
 * directory command option - required to work. Ex: dir: __dirname
 * decord command
 * eval subcommand for decord command
+* reload subcommand for decord command
+* execute subcommand for decord command
 
 
 # Support Server
