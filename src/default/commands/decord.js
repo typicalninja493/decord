@@ -91,8 +91,38 @@ module.exports = class pingCommand extends Command {
               await paginate(message, t);
           });
           }
+          else if(args[0].toLowerCase() === 'reload') {
+            const commandName = args[1];
+            const command =
+              message.client.commands.get(commandName) ||
+              message.client.commands.find(
+                (cmd) => cmd.aliases && cmd.aliases.includes(commandName),
+              );
+            if (!command) {
+              return message.channel.send(
+                `There is no command with name or alias \`${commandName}\`, ${message.author}!`,
+              );
+            }
+    try {
+      delete require.cache[
+        require.resolve(`${command.dir}/${command.name}`)
+      ];
+      const newCommand = require(`${command.dir}/${
+        command.name
+      }`);
+      message.client.commands.set(newCommand.name, newCommand);
+      message.channel.send(
+        `Reloaded Command **${command.name}** located at \`commands/${command.name}.js\``,
+      );
+    }
+    catch (error) {
+      message.channel.send(
+        `There was an error while reloading a command \`${command.name}\`:\n\`${error.message}\``,
+      );
+    }
+          }
           else {
-            return message.channel.send(`\`${args[0]}\` Is not a valid subcommand`);
+            return message.channel.send(`\`${args[0]}\` Is not a valid sub-command`);
           }
         }
 };
