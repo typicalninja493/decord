@@ -94,8 +94,8 @@ module.exports = class pingCommand extends Command {
           else if(args[0].toLowerCase() === 'reload') {
             const commandName = args[1];
             const command =
-              message.client.commands.get(commandName) ||
-              message.client.commands.find(
+              message.client.Commands.get(commandName) ||
+              message.client.Commands.find(
                 (cmd) => cmd.aliases && cmd.aliases.includes(commandName),
               );
             if (!command) {
@@ -110,7 +110,7 @@ module.exports = class pingCommand extends Command {
       const newCommand = require(`${command.dir}/${
         command.name
       }`);
-      message.client.commands.set(newCommand.name, newCommand);
+      message.client.Commands.set(newCommand.name, newCommand);
       message.channel.send(
         `Reloaded Command **${command.name}** located at \`commands/${command.name}.js\``,
       );
