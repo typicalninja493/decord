@@ -34,7 +34,7 @@ const timestamps = cooldowns.get(cmd.name);
 const cooldownAmount = (cmd.cooldown || 3) * 1000;
 
 
-if (timestamps.has(message.author.id) && !message.client.ownerID.includes(message.author.id)) {
+    if (timestamps.has(message.author.id) && !message.client.ownerID.includes(message.author.id) && !cmd.cooldownIgnored.includes(message.author.id)) {
 	const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 
 	if (now < expirationTime) {

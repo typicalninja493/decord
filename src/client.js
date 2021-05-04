@@ -34,6 +34,8 @@ class Client extends Discord.Client {
     this.util = require('../index').util;
     this.status = options.status;
 
+   this.groups = [];
+
     /*
     if(fs.existsSync(this.eventsPath)) {
         try {
@@ -169,7 +171,7 @@ class Client extends Discord.Client {
     return true;
   }
 
-  
+
   loadPlugins(filePath, client, ignoredPlugins = {}) {
     if (!fs.existsSync(filePath)) {
       throw new Error(`Path ${filePath} for plugins was not found`);
@@ -195,7 +197,17 @@ class Client extends Discord.Client {
     }
     return true;
   }
- // registerControllers(pathToFile, ignoredControllers = {}) {}
+
+    /**
+     * Register Groups
+     * @param {Array} groups - groups to register
+     */
+ registerGroups(groups = []) {
+   if(Array.isArray(groups)) throw new Error('Groups but be a array');
+groups.forEach((group) => {
+  this.groups.push(group);
+});
+ }
 }
 
 module.exports = Client;

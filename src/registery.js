@@ -34,6 +34,10 @@ class Register {
 
           await valid.validateCommands(cmd, client);
 
+          if(ignoredcommands[cmd.group] == false) {
+          client.emit('update', `[Register] => Command ${commandName} Was ignored as group`);
+          return;
+          }
 
            collection.set(commandName, cmd);
            client.emit('commandLoaded', commandName);

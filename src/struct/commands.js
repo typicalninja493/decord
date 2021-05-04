@@ -18,6 +18,7 @@ class Command {
       userPermissions = [],
       cooldownIgnored = [],
       nsfw = false,
+      group = null,
     //  args = [],
     } = options;
     /*

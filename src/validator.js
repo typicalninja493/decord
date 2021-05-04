@@ -57,6 +57,9 @@ class Validator {
     }
     if(!command.dir) throw new ValidationError('Need the dir param');
 
+    if(!command.group) throw new ValidationError('Need the group param');
+    if(typeof command.group !== 'string') throw new ValidationError('Group param must be a string');
+
     if(!fs.existsSync(command.dir)) throw new ValidationError(`Command dir ${command.dir} does not exists`);
 
   }
