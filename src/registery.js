@@ -16,7 +16,8 @@ class Register {
       const stat = await fs.lstat(path.join(pathTOFile, file));
 
       if(stat.isDirectory()) {
-        this.registerCommands(path.join(pathTOFile, file), collection);
+        if(!client.groups.includes(file)) return;
+       return this.registerCommands(path.join(pathTOFile, file), collection);
       }
  else if(file.endsWith('.js')) {
           const commandName = file.substring(0, file.indexOf('.js'));
@@ -33,7 +34,8 @@ class Register {
             const cmd = new cmdModule(client);
 
           await valid.validateCommands(cmd, client);
-
+          const groupName = cmd.dir.split('/')[4];
+          cmd.group = groupName;
           if(ignoredcommands[cmd.group] == false) {
           client.emit('update', `[Register] => Command ${commandName} Was ignored as group`);
           return;
