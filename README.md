@@ -129,6 +129,7 @@ client.registerDefaultEvents(client, [
 * MongoDB Support
 * Enable - Default Command
 * Disable - Default Command
+* Command groups
 
 
 # Current features
