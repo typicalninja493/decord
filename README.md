@@ -1,21 +1,23 @@
+> Decord is now maintained by my friend hallel, the package is published on npm [here](https://www.npmjs.com/package/decord), find the github for the package [here](https://github.com/Hallel9/decord)
+
 ### Decord
 
 * What is decord? 
 
- #### Decord is a yet another frame-work for [discord.js](https://discord.js.org/), this was inspired by [discord-akairo](https://www.npmjs.com/package/discord-akairo)
+ ~~#### Decord is a yet another frame-work for [discord.js](https://discord.js.org/), this was inspired by [discord-akairo](https://www.npmjs.com/package/discord-akairo)~~
 
- This in beta!!
+ ~~This in beta!!~~
 
 ## Usage
 
-* This package is not yet released to npm, `index.js` is the main file of the package (will be renamed to the package name when released)
+~~* This package is not yet released to npm, `index.js` is the main file of the package (will be renamed to the package name when released)~~
 
 # Default / Built-in Commands
 
-* help
-* decode - Same as a help command
+~~* help~~
+~~* decode - Same as a help command~~
 
-**More Coming Soon**
+~~**More Coming Soon**~~ (moved)
 
 ```
 const { Client } = require('./index') 
