@@ -6,18 +6,16 @@
 
  ~~#### Decord is a yet another frame-work for [discord.js](https://discord.js.org/), this was inspired by [discord-akairo](https://www.npmjs.com/package/discord-akairo)~~
 
- ~~This in beta!!~~
+ This in beta!!
 
 ## Usage
 
-~~* This package is not yet released to npm, `index.js` is the main file of the package (will be renamed to the package name when released)~~
-
 # Default / Built-in Commands
 
-~~* help~~
-~~* decode - Same as a help command~~
+* help
+* decode - Same as a help command
 
-~~**More Coming Soon**~~ (moved)
+**More Coming Soon** (moved)
 
 ```
 const { Client } = require('./index') 
@@ -128,7 +126,6 @@ client.registerDefaultEvents(client, [
 * Unload - Default Command
 * Per-Server Settings
 * Cache storage
-* MongoDB Support
 * Enable - Default Command
 * Disable - Default Command
 * Command groups
@@ -148,6 +145,7 @@ client.registerDefaultEvents(client, [
 * eval subcommand for decord command
 * reload subcommand for decord command
 * execute subcommand for decord command
+* MongoDB Support
 
 
 # Support Server
